@@ -1,0 +1,101 @@
+﻿/* Megalon July 2018.
+   Made by Megalon on the Beat Saber Modding Group Discord
+   https://discord.gg/gS7zC24
+*/
+body
+{
+    font-family: "Teko", Times, serif;
+	color:white;
+	background-color: #00ff00;
+	padding: 0px;
+	font-size: 80px;
+}
+
+#leftPlayer{
+	text-align:left;
+	position:absolute;
+	width:100%;
+	padding:0 0 0 40px;
+	top: 150px;
+}
+
+#rightPlayer{
+	text-align:right;
+	position:absolute;
+	right:20px;
+	top: 300px;
+}
+
+#songInfo{
+    width: 100%;
+	padding:0px;
+	margin:0px;
+	position: absolute;
+	text-align:center;
+	top: 450px;
+}
+
+#songInfoInner {
+	position:relative;
+	width:50%;
+	margin:0 auto;
+}
+
+#MainSongname{
+	font-size: 80px;
+}
+
+#SongSubName{
+	position:relative;
+	font-size: 64px;
+	top: -10px;
+}
+
+#Author{
+	position:relative;
+	font-size: 48px;
+	top: -10px;
+}
+
+#OtherInfo{
+	position:relative;
+	font-size: 48px;
+	color:#868686;
+	top: -10px;
+}
+
+#scoreboardOuter{
+	padding:0px;
+	margin:0px;
+	position: absolute;
+	text-align:center;
+	font-size: 110px;
+	left: 100px;
+	color:black;
+}
+
+#scoreboardInner{
+	/*position:relative;
+	width:50%;
+	margin:0 auto;
+	*/
+}
+
+#scoreLeft{
+	position:absolute;
+	top:10px;
+	left:32px;
+	color:white;
+}
+
+#scoreRight{
+	position:absolute;
+	top:10px;
+	left:160px;
+	color:white;
+}
+
+.streamlink{
+	color: #888888;
+	font-size: 48px;
+}

@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<link rel="stylesheet" type="text/css" href="namedisplay-style.css">
+    <meta charset="utf-8" />
+    <title>Made by Megalon on the Beat Saber Modding Group Discord</title>
+	<!--   Megalon July 2018. https://discord.gg/gS7zC24 -->
+</head>
+<body>
+
+<div id="leftPlayer">
+	<div class="name">
+	Loading name
+	</div>
+	<div class="streamlink">
+	Loading link
+	</div>
+</div>
+<div id="rightPlayer">
+	<div class="name">
+	Loading name
+	</div>
+	<div class="streamlink">
+	Loading link
+	</div>
+</div>
+
+<div id="songInfo">
+	<div id="songInfoInner">
+		<div id="MainSongname">Loading...</div>
+		<div id="SongSubName"></div>
+		<div id="Author"></div>
+		<div id="OtherInfo"></div>
+	</div>
+</div>
+
+<div id="scoreboardOuter">
+	<div id="scoreLeft">
+0
+	</div>
+	<div id="scoreRight">
+1
+	</div>
+</div>
+
+	<script type="text/javascript">
+	
+		var MainSongname = document.getElementById("MainSongname");
+		var SongSubName = document.getElementById("SongSubName");
+		var Author = document.getElementById("Author");
+		var OtherInfo = document.getElementById("OtherInfo");
+		var LeadingPlayer = document.getElementById("LeadingPlayer");
+		
+		var leftName        = getFirstInstanceOfClass("leftPlayer",  "name");
+		var leftStreamlink  = getFirstInstanceOfClass("leftPlayer",  "streamlink");
+		var rightName       = getFirstInstanceOfClass("rightPlayer", "name");
+		var rightStreamlink = getFirstInstanceOfClass("rightPlayer", "streamlink");
+		
+		var scoreLeft = document.getElementById("scoreLeft");
+		var scoreRight = document.getElementById("scoreRight");
+
+		var updateInterval = 500;
+
+		var allText;
+
+		// Check if the song data has been updated
+		setInterval(function(){
+
+			//console.log("Reading songdata file...");
+			readTextFile("songdata.txt");
+			//console.log("Finished reading songdata file.");
+			//console.log(allText);
+
+			var splitText = allText.split('<br>') 
+			
+		
+			if(splitText.length >= 5){
+				MainSongname.innerHTML = splitText[0];
+				SongSubName.innerHTML = splitText[1];
+				Author.innerHTML = "beatmap by: " + splitText[2];
+				OtherInfo.innerHTML = "bpm: " + splitText[3];
+			}else{
+				MainSongname.innerHTML = "Loading data...";
+				SongSubName.innerHTML = "";
+				Author.innerHTML =  "";
+				OtherInfo.innerHTML =  "";
+			}
+			
+			//console.log("Reading players file...");
+			readTextFile("players.txt");
+			//console.log("Finished reading players file.");
+
+			var splitText = allText.split('\n') 
+		
+			if(splitText.length >= 6){
+				leftName.innerHTML        = splitText[0];
+				leftStreamlink.innerHTML  = splitText[1];
+				scoreLeft.innerHTML       = splitText[2];
+				rightName.innerHTML       = splitText[3];
+				rightStreamlink.innerHTML = splitText[4];
+				scoreRight.innerHTML      = splitText[5];
+			}else{
+				leftName.innerHTML    = "Loading name...";
+				leftStreamlink.innerHTML = "Loading link...";
+				rightName.innerHTML      = "Loading name...";
+				rightStreamlink.innerHTML   = "Loading link...";
+				scoreleft.innerHTML  = 0;
+				scoreRight.innerHTML = 0;
+			}
+
+		}, updateInterval);
+
+		// Read the text file containing the song data
+		function readTextFile(file)
+		{
+			var rawFile = new XMLHttpRequest();
+			rawFile.open("GET", file, false);
+			rawFile.onreadystatechange = function ()
+			{
+				if(rawFile.readyState === 4)
+				{
+					if(rawFile.status === 200 || rawFile.status == 0)
+					{
+						allText = rawFile.responseText;
+					}
+				}
+			}
+			rawFile.send(null);
+		}
+
+		function getFirstInstanceOfClass(idname, classname){
+			return document.getElementById(idname).getElementsByClassName(classname)[0];
+		}
+
+
+	</script>
+
+</body>
+</html>
